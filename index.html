@@ -226,12 +226,55 @@ body.on-ops #brandmark,body.on-ops #keyhint{opacity:0;pointer-events:none}
 
 /* ---------- responsive ---------- */
 @media (max-width:1080px){
-  .slide-inner,.slide-inner.rev{grid-template-columns:1fr;gap:20px}
-  .scene-panel{height:34vh;min-height:260px}
-  .ops-side{display:none}
+  /* slides scroll vertically when content overflows; short slides stay centered */
+  .slide{display:flex;flex-direction:column;justify-content:flex-start;overflow-y:auto;
+    -webkit-overflow-scrolling:touch;padding:64px clamp(18px,5vw,48px) 104px}
+  .slide-inner,.slide-inner.rev{grid-template-columns:1fr;gap:18px;margin:auto 0}
+  .slide-inner .copy{order:1}
+  .slide-inner .scene-panel{order:2}
+  .scene-panel{height:38vh;min-height:240px}
   .card-grid.g3{grid-template-columns:1fr 1fr}
   .outcome-grid{grid-template-columns:1fr 1fr}
   .phases{grid-template-columns:1fr}
+  /* ops room: map on top, alert feed as a swipeable strip below */
+  .ops-shell{inset:8px}
+  .ops-main{flex-direction:column}
+  .ops-side{display:flex;width:100%;flex:none;border-left:none;border-top:1px solid rgba(255,255,255,.08)}
+  .ops-side h4{padding:10px 16px 6px}
+  #alert-feed{flex-direction:row;overflow-x:auto;overflow-y:hidden;padding:0 12px 52px;gap:10px}
+  #alert-feed::-webkit-scrollbar{height:4px}
+  .alert-card{min-width:248px;max-width:248px;flex:none}
+  .ops-legend{display:none}
+  .ops-top{padding:10px 14px;gap:8px}
+  .ops-title{font-size:13.5px}
+  .kpis{margin-left:0;width:100%;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px}
+  .kpi{flex:none}
+  .map-ctl .wx{display:none}
+}
+@media (max-width:720px){
+  #keyhint{display:none}
+  #brandmark{top:14px}
+  #hud{padding:10px 14px}
+  #counter{display:none}
+  #btn-fs{display:none}
+  #dots{gap:5px}
+  #dots button{width:6px;height:6px}
+  #dots button.on{width:18px}
+  .display-xl{font-size:clamp(34px,9vw,46px);letter-spacing:-1.5px}
+  .display-lg{font-size:clamp(27px,7.5vw,38px);letter-spacing:-1.2px}
+  .display-md{font-size:clamp(24px,6.5vw,32px)}
+  .copy .lede{font-size:15px}
+  .fcard{padding:18px;min-height:0}
+  .scene-panel{height:34vh;min-height:210px}
+  .btn{height:42px;padding:10px 16px}
+  .map-ctl .btn{height:38px;padding:0 12px;font-size:12.5px}
+  .ops-title{display:none}
+}
+@media (max-width:520px){
+  .card-grid.g3,.card-grid.g2{grid-template-columns:1fr}
+  .outcome-grid{grid-template-columns:1fr}
+  .hero-title .ar{font-size:26px}
+  .alert-card{min-width:225px;max-width:225px}
 }
 /* fullscreen polish */
 :fullscreen body,:fullscreen{background:var(--canvas)}

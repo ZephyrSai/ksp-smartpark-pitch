@@ -52,20 +52,28 @@
   window.addEventListener('wheel', (e) => {
     const now = Date.now();
     if (now - wheelLock < 900) return;
-    // don't hijack scrolling inside the alert feed
-    if (e.target.closest && e.target.closest('#alert-feed')) return;
+    // don't hijack scrolling inside the alert feed / KPI strip, or a slide that scrolls
+    if (e.target.closest && (e.target.closest('#alert-feed') || e.target.closest('.kpis'))) return;
+    const sl = e.target.closest && e.target.closest('.slide');
+    if (sl && sl.scrollHeight > sl.clientHeight + 4) return;
     if (Math.abs(e.deltaY) < 24) return;
     wheelLock = now;
     e.deltaY > 0 ? next() : prevS();
   }, { passive: true });
 
-  // touch swipe
-  let tx = null;
-  window.addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true });
+  // touch swipe — but never steal gestures from the 3D canvases or the ops room
+  let tx = null, ty = null;
+  window.addEventListener('touchstart', (e) => {
+    const t = e.target;
+    if (t.closest && (t.closest('.scene-mount') || t.closest('.ops-shell'))) { tx = null; return; }
+    tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+  }, { passive: true });
   window.addEventListener('touchend', (e) => {
     if (tx == null) return;
     const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > 60) (dx < 0 ? next() : prevS());
+    const dy = e.changedTouches[0].clientY - ty;
+    // horizontal-dominant swipes only, so vertical scrolling inside a slide never flips pages
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6) (dx < 0 ? next() : prevS());
     tx = null;
   }, { passive: true });
 
