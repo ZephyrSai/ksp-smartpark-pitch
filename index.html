@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WĀHA — Master of Masters Platform · King Salman Park</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   WĀHA pitch deck — design system: "clay" (see DESIGN.md)
+   Cream canvas · saturated feature cards · rounded 24px · Inter
+   ============================================================ */
+:root{
+  --primary:#0a0a0a; --primary-active:#1f1f1f;
+  --ink:#0a0a0a; --body:#3a3a3a; --body-strong:#1a1a1a;
+  --muted:#6a6a6a; --muted-soft:#9a9a9a;
+  --hairline:#e5e5e5; --hairline-soft:#f0f0f0;
+  --canvas:#fffaf0; --surface-soft:#faf5e8; --surface-card:#f5f0e0; --surface-strong:#ebe6d6;
+  --surface-dark:#0a1a1a; --surface-dark-elevated:#1a2a2a;
+  --on-primary:#ffffff; --on-dark:#ffffff; --on-dark-soft:#a0a0a0;
+  --pink:#ff4d8b; --teal:#1a3a3a; --lavender:#b8a4ed; --peach:#ffb084;
+  --ochre:#e8b94a; --mint:#a4d4c5; --coral:#ff6b5a;
+  --success:#22c55e; --warning:#f59e0b; --error:#ef4444;
+  --r-xs:6px; --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:24px; --r-pill:9999px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:var(--canvas);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55}
+
+/* ---------- typography ---------- */
+.display-xl{font-size:clamp(44px,5.6vw,72px);font-weight:500;line-height:1;letter-spacing:-2.5px}
+.display-lg{font-size:clamp(36px,4.4vw,56px);font-weight:500;line-height:1.05;letter-spacing:-2px}
+.display-md{font-size:clamp(28px,3.2vw,40px);font-weight:500;line-height:1.1;letter-spacing:-1px}
+.display-sm{font-size:clamp(24px,2.5vw,32px);font-weight:500;line-height:1.15;letter-spacing:-.5px}
+.title-lg{font-size:24px;font-weight:600;line-height:1.3;letter-spacing:-.3px}
+.title-md{font-size:18px;font-weight:600;line-height:1.4}
+.title-sm{font-size:16px;font-weight:600;line-height:1.4}
+.body-md{font-size:16px;font-weight:400;line-height:1.55;color:var(--body)}
+.body-sm{font-size:14px;font-weight:400;line-height:1.55;color:var(--body)}
+.caption{font-size:13px;font-weight:500;line-height:1.4}
+.kicker{font-size:12px;font-weight:600;line-height:1.4;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- deck & slides ---------- */
+#deck{position:fixed;inset:0;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:64px clamp(32px,6vw,96px);opacity:0;visibility:hidden;transform:translateY(26px) scale(.985);
+  transition:opacity .55s ease,transform .55s ease,visibility 0s linear .55s;pointer-events:none}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .55s ease,transform .55s ease;pointer-events:auto}
+.slide-inner{width:100%;max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(380px,7fr) 5fr;gap:clamp(24px,4vw,56px);align-items:center}
+.slide-inner.rev{grid-template-columns:5fr minmax(380px,7fr)}
+.slide-inner.full{grid-template-columns:1fr}
+
+/* staged entrance of text children */
+.copy>*{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.slide.active .copy>*{opacity:1;transform:none}
+.slide.active .copy>*:nth-child(1){transition-delay:.10s}
+.slide.active .copy>*:nth-child(2){transition-delay:.18s}
+.slide.active .copy>*:nth-child(3){transition-delay:.26s}
+.slide.active .copy>*:nth-child(4){transition-delay:.34s}
+.slide.active .copy>*:nth-child(5){transition-delay:.42s}
+.slide.active .copy>*:nth-child(6){transition-delay:.50s}
+.copy .kicker{margin-bottom:16px}
+.copy h1,.copy h2{margin-bottom:20px}
+.copy .lede{margin-bottom:24px;max-width:52ch}
+
+/* ---------- 3D scene panel (hero-illustration-card) ---------- */
+.scene-panel{position:relative;background:var(--surface-soft);border-radius:var(--r-xl);
+  min-height:420px;height:clamp(420px,58vh,640px);overflow:hidden}
+.scene-panel.tint-mint{background:linear-gradient(160deg,#eef6ef,#faf5e8)}
+.scene-panel.tint-peach{background:linear-gradient(160deg,#fdeee2,#faf5e8)}
+.scene-panel.tint-lav{background:linear-gradient(160deg,#f0ecfb,#faf5e8)}
+.scene-panel.tint-sky{background:linear-gradient(160deg,#e8f2f0,#faf5e8)}
+.scene-mount{position:absolute;inset:0}
+.scene-mount canvas{display:block}
+.scene-tag{position:absolute;left:16px;bottom:14px;background:rgba(255,250,240,.85);backdrop-filter:blur(6px);
+  border:1px solid var(--hairline);border-radius:var(--r-pill);padding:5px 14px;font-size:12px;font-weight:600;
+  letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- pills / badges ---------- */
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface-card);border-radius:var(--r-pill);
+  padding:6px 14px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink)}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:var(--pink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--surface-card);border-radius:var(--r-pill);padding:6px 14px;font-size:13px;font-weight:500}
+.chip b{font-weight:600}
+.chip.c-pink{background:var(--pink);color:#fff}.chip.c-teal{background:var(--teal);color:#fff}
+.chip.c-lav{background:var(--lavender)}.chip.c-peach{background:var(--peach)}
+.chip.c-ochre{background:var(--ochre)}.chip.c-mint{background:var(--mint)}
+.chip.c-coral{background:var(--coral);color:#fff}
+
+/* ---------- stat & feature cards ---------- */
+.card-grid{display:grid;gap:14px}
+.card-grid.g2{grid-template-columns:1fr 1fr}
+.card-grid.g3{grid-template-columns:1fr 1fr 1fr}
+.fcard{border-radius:var(--r-xl);padding:24px;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+.fcard h3{font-size:17px;font-weight:600;line-height:1.35;letter-spacing:-.2px}
+.fcard p{font-size:13.5px;line-height:1.5;opacity:.86}
+.fcard .num{font-size:clamp(26px,2.6vw,38px);font-weight:500;letter-spacing:-1.2px;line-height:1}
+.fcard .cap{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;opacity:.7}
+.fcard.pink{background:var(--pink);color:#fff}
+.fcard.teal{background:var(--teal);color:#fff}
+.fcard.lav{background:var(--lavender);color:var(--ink)}
+.fcard.peach{background:var(--peach);color:var(--ink)}
+.fcard.ochre{background:var(--ochre);color:var(--ink)}
+.fcard.mint{background:var(--mint);color:var(--ink)}
+.fcard.coral{background:var(--coral);color:#fff}
+.fcard.cream{background:var(--surface-card);color:var(--ink)}
+.fcard.dark{background:var(--surface-dark);color:#fff}
+
+/* ---------- architecture layer list (slide 5) ---------- */
+.layers{display:flex;flex-direction:column;gap:10px}
+.layer-row{display:flex;align-items:center;gap:14px;background:var(--surface-card);border:1px solid transparent;
+  border-radius:var(--r-lg);padding:14px 18px;cursor:pointer;transition:all .25s ease;text-align:left;font-family:var(--font)}
+.layer-row:hover{transform:translateX(4px)}
+.layer-row.sel{background:var(--canvas);border-color:var(--ink);transform:translateX(6px)}
+.layer-row .sw{width:14px;height:14px;border-radius:5px;flex:none}
+.layer-row .lt{font-size:15px;font-weight:600}
+.layer-row .ld{font-size:12.5px;color:var(--muted);margin-top:1px}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--primary);color:var(--on-primary);
+  border:none;border-radius:var(--r-md);padding:12px 20px;height:44px;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer}
+.btn:active{background:var(--primary-active)}
+.btn.sec{background:var(--canvas);color:var(--ink);border:1px solid var(--hairline)}
+.btn.oncolor{background:#fff;color:var(--ink)}
+.btn.ghost-dark{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.18)}
+.btn.ghost-dark.on{background:#fff;color:var(--ink)}
+
+/* ---------- HUD (nav chrome) ---------- */
+#hud{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;
+  padding:16px clamp(24px,4vw,48px);z-index:60;pointer-events:none}
+#hud>*{pointer-events:auto}
+#dots{display:flex;gap:7px;align-items:center}
+#dots button{width:8px;height:8px;border-radius:50%;border:none;background:#d9d2c0;cursor:pointer;padding:0;transition:all .25s}
+#dots button.on{width:26px;border-radius:var(--r-pill);background:var(--ink)}
+#hud .hud-left,#hud .hud-right{display:flex;align-items:center;gap:10px}
+.hud-btn{display:inline-flex;align-items:center;gap:7px;background:var(--canvas);border:1px solid var(--hairline);
+  border-radius:var(--r-pill);padding:8px 14px;font-family:var(--font);font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer}
+.hud-btn:hover{background:var(--surface-soft)}
+#counter{font-size:12.5px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+#brandmark{position:fixed;top:20px;left:clamp(24px,4vw,48px);z-index:60;display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.3px}
+#brandmark .lg{width:26px;height:26px;border-radius:9px;background:conic-gradient(from 210deg,var(--pink),var(--peach),var(--ochre),var(--mint),var(--lavender),var(--pink))}
+#brandmark small{font-weight:500;color:var(--muted);letter-spacing:0}
+#keyhint{position:fixed;top:22px;right:clamp(24px,4vw,48px);z-index:60;font-size:12px;color:var(--muted-soft);font-weight:500}
+#brandmark,#keyhint{transition:opacity .4s}
+body.on-ops #brandmark,body.on-ops #keyhint{opacity:0;pointer-events:none}
+#keyhint b{color:var(--muted);font-weight:600;background:var(--surface-card);border-radius:6px;padding:2px 7px;margin:0 2px}
+.progressbar{position:fixed;top:0;left:0;height:3px;background:var(--ink);z-index:70;transition:width .4s ease}
+
+/* ---------- SLIDE 6 · dark ops room ---------- */
+.slide.ops{padding:0}
+.ops-shell{position:absolute;inset:clamp(14px,2vw,26px);background:var(--surface-dark);border-radius:var(--r-xl);
+  display:flex;flex-direction:column;overflow:hidden;color:#fff}
+.ops-top{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
+.ops-title{font-size:16px;font-weight:600;letter-spacing:-.2px;display:flex;align-items:center;gap:10px}
+.ops-title .live{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 0 0 rgba(34,197,94,.7);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 9px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.kpis{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+.kpi{background:var(--surface-dark-elevated);border-radius:var(--r-md);padding:7px 13px;font-size:12px;color:var(--on-dark-soft)}
+.kpi b{display:block;color:#fff;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.2px}
+.ops-main{flex:1;display:flex;min-height:0}
+.ops-map{flex:1;position:relative;min-width:0}
+.ops-map .scene-mount{position:absolute;inset:0}
+.ops-side{width:308px;flex:none;border-left:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;min-height:0}
+.ops-side h4{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--on-dark-soft);padding:14px 18px 8px}
+#alert-feed{flex:1;overflow-y:auto;padding:0 12px 12px;display:flex;flex-direction:column;gap:8px}
+#alert-feed::-webkit-scrollbar{width:4px}#alert-feed::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:4px}
+.alert-card{background:var(--surface-dark-elevated);border:1px solid transparent;border-radius:var(--r-lg);padding:12px 14px;cursor:pointer;transition:all .2s;text-align:left;font-family:var(--font);color:#fff;width:100%}
+.alert-card:hover{border-color:rgba(255,255,255,.2)}
+.alert-card.sel{border-color:#fff}
+.alert-card .ah{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600}
+.alert-card .asw{width:9px;height:9px;border-radius:3px;flex:none}
+.alert-card .ab{font-size:12px;color:var(--on-dark-soft);margin-top:4px;line-height:1.45}
+.alert-card .meta{display:flex;gap:6px;margin-top:8px}
+.alert-card .meta span{font-size:10.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;background:rgba(255,255,255,.07);border-radius:6px;padding:3px 7px;color:var(--on-dark-soft)}
+.alert-card .act{margin-top:10px;display:none}
+.alert-card.sel .act{display:flex;gap:8px}
+.alert-card .act .btn{height:32px;padding:0 13px;font-size:12px;border-radius:9px}
+.alert-card.resolved{opacity:.45}
+.alert-card .ok{color:var(--success);font-weight:600;font-size:12px}
+.ops-legend{display:flex;gap:6px;padding:10px 18px 52px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.08)}
+.ops-legend span{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--on-dark-soft)}
+.ops-legend i{width:8px;height:8px;border-radius:3px;display:inline-block}
+.map-ctl{position:absolute;top:14px;left:14px;display:flex;gap:8px;z-index:5;align-items:center}
+.map-ctl .wx{background:rgba(10,26,26,.72);border:1px solid rgba(255,255,255,.09);border-radius:var(--r-pill);padding:9px 14px;font-size:12px;color:var(--on-dark-soft);backdrop-filter:blur(8px)}
+.empty-feed{color:var(--on-dark-soft);font-size:12.5px;padding:10px 8px;text-align:center}
+
+/* ---- in-map dashboard overlays ---- */
+#zone-labels{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:3}
+.zl{position:absolute;transform:translate(-50%,-130%);font-size:9.5px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:rgba(255,255,255,.62);white-space:nowrap;text-shadow:0 1px 5px rgba(0,0,0,.9);text-align:center}
+.zl::after{content:"";display:block;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.5);margin:3px auto 0}
+.ops-status{position:absolute;left:14px;bottom:14px;z-index:5;display:flex;flex-direction:column;gap:5px;background:rgba(10,26,26,.74);border:1px solid rgba(255,255,255,.09);border-radius:var(--r-lg);padding:11px 13px;backdrop-filter:blur(8px);min-width:158px}
+.ops-status h5{font-size:9.5px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--on-dark-soft);margin-bottom:3px}
+.ss{display:flex;align-items:center;gap:7px;font-size:11px;color:#d8dcda}
+.ss i{width:7px;height:7px;border-radius:2.5px;flex:none}
+.ss b{margin-left:auto;font-weight:700;color:var(--success);font-size:9.5px;letter-spacing:.6px;padding-left:12px}
+.ss b.fault{color:var(--warning)}
+.ops-gauges{position:absolute;right:14px;bottom:14px;z-index:5;display:flex;flex-direction:column;gap:9px;background:rgba(10,26,26,.74);border:1px solid rgba(255,255,255,.09);border-radius:var(--r-lg);padding:12px 14px;backdrop-filter:blur(8px);width:208px}
+.g{display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:8px}
+.g .gl{font-size:9.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--on-dark-soft)}
+.g .gb{height:5px;background:rgba(255,255,255,.13);border-radius:3px;overflow:hidden}
+.g .gb i{display:block;height:100%;width:0;background:var(--mint);border-radius:3px;transition:width .9s ease}
+.g b{font-size:11px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+.g.spark{display:block}
+.g.spark canvas{display:block;margin-top:5px;width:100%}
+@media (max-width:1080px){.ops-status,.ops-gauges{display:none}}
+
+/* ---------- roadmap ---------- */
+.phases{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.phase .ph{font-size:11px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;opacity:.65;margin-bottom:8px}
+.phase ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.phase li{font-size:13px;line-height:1.45;padding-left:16px;position:relative;opacity:.9}
+.phase li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:2px;background:currentColor;opacity:.55}
+
+/* ---------- outcomes ---------- */
+.outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1080px}
+.note{font-size:12.5px;color:var(--muted-soft);margin-top:18px}
+
+/* ---------- hero specifics ---------- */
+.hero-title{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.hero-title .ar{font-size:clamp(30px,3vw,44px);color:var(--muted);font-weight:500}
+.hint-row{display:flex;gap:10px;align-items:center;margin-top:26px;flex-wrap:wrap}
+
+/* ---------- responsive ---------- */
+@media (max-width:1080px){
+  .slide-inner,.slide-inner.rev{grid-template-columns:1fr;gap:20px}
+  .scene-panel{height:34vh;min-height:260px}
+  .ops-side{display:none}
+  .card-grid.g3{grid-template-columns:1fr 1fr}
+  .outcome-grid{grid-template-columns:1fr 1fr}
+  .phases{grid-template-columns:1fr}
+}
+/* fullscreen polish */
+:fullscreen body,:fullscreen{background:var(--canvas)}
+</style>
+</head>
+<body>
+
+<div id="brandmark"><span class="lg"></span>WĀHA <small>· master of masters</small></div>
+<div id="keyhint"><b>←</b><b>→</b> navigate &nbsp; <b>F</b> fullscreen</div>
+<div class="progressbar" id="progressbar"></div>
+
+<div id="deck">
+
+  <!-- ═══════════════ 0 · HERO ═══════════════ -->
+  <section class="slide" data-scene="hero">
+    <div class="slide-inner">
+      <div class="copy">
+        <span class="badge"><span class="dot"></span>Pitch · Smart Park Platform · Riyadh</span>
+        <h1 class="display-xl hero-title">WĀHA <span class="ar">وَاحَة</span></h1>
+        <p class="title-lg" style="letter-spacing:-.3px">The master-of-masters platform for <b>King Salman Park</b>.</p>
+        <p class="body-md lede">Dozens of operational systems. One living map. WĀHA gives the world's largest urban park a single pane of glass for <b>visibility, control and optimisation</b> — every valve, light, camera, crew and crowd, in real time.</p>
+        <div class="hint-row">
+          <button class="btn" id="btn-start">Start the tour →</button>
+          <button class="btn sec" id="btn-fs-hero">⛶ Fullscreen</button>
+        </div>
+      </div>
+      <div class="scene-panel tint-mint">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">Live park · drag to orbit</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 1 · THE CANVAS ═══════════════ -->
+  <section class="slide" data-scene="canvas">
+    <div class="slide-inner rev">
+      <div class="scene-panel tint-peach">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">King Salman Park · district massing</span>
+      </div>
+      <div class="copy">
+        <span class="kicker">01 · The canvas</span>
+        <h2 class="display-lg">A park the size of a city district.</h2>
+        <p class="body-md lede">Rising on the former Riyadh Air Base under Vision 2030, King Salman Park will be the largest urban park in the world — roughly five times Hyde Park, four times Central Park.</p>
+        <div class="card-grid g3">
+          <div class="fcard mint"><span class="num">17.2</span><span class="cap">km² total area</span></div>
+          <div class="fcard peach"><span class="num">1M</span><span class="cap">trees planted</span></div>
+          <div class="fcard lav"><span class="num">160+</span><span class="cap">attractions</span></div>
+          <div class="fcard ochre"><span class="num">11.6</span><span class="cap">km² green space</span></div>
+          <div class="fcard cream"><span class="num">7+</span><span class="cap">km² of pathways</span></div>
+          <div class="fcard teal"><span class="num">5</span><span class="cap">metro stations</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 2 · THE PROBLEM ═══════════════ -->
+  <section class="slide" data-scene="silos">
+    <div class="slide-inner">
+      <div class="copy">
+        <span class="kicker">02 · The problem</span>
+        <h2 class="display-lg">Dozens of systems.<br>Dozens of vendors.<br>Zero shared language.</h2>
+        <p class="body-md lede">160+ attractions — a Royal Arts Complex, a golf resort, an equestrian centre, sports fields, mosques, visitor centres — and every venue arrives with its own protocol, console and alarm queue. The operational core alone:</p>
+        <div class="chips">
+          <span class="chip c-mint">💧 Irrigation</span>
+          <span class="chip c-ochre">💡 Lighting control</span>
+          <span class="chip c-coral">📢 PAVA</span>
+          <span class="chip c-lav">🅿️ Parking</span>
+          <span class="chip c-teal">📶 Public Wi-Fi</span>
+          <span class="chip c-pink">📹 CCTV</span>
+          <span class="chip c-peach">⚠️ Incident detection</span>
+          <span class="chip">🌿 Park ops · trimming, waste, maintenance</span>
+        </div>
+        <p class="caption" style="margin-top:14px;color:var(--muted-soft)">…then the venue long tail:</p>
+        <div class="chips" style="margin-top:8px;opacity:.75">
+          <span class="chip">🏢 BMS / HVAC</span>
+          <span class="chip">🚪 Access control</span>
+          <span class="chip">🎟️ Ticketing</span>
+          <span class="chip">🔥 Fire &amp; life safety</span>
+          <span class="chip">🖥️ Signage</span>
+          <span class="chip">⛲ Fountains</span>
+          <span class="chip">🔌 EV charging</span>
+        </div>
+        <p class="body-sm" style="margin-top:16px;color:var(--muted)">Silos don't just cost screens — they cost minutes during incidents, litres in over-watering, and kilowatts in unsynchronised lighting.</p>
+      </div>
+      <div class="scene-panel tint-lav">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">Today · disconnected silos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 3 · THE IDEA ═══════════════ -->
+  <section class="slide" data-scene="unify">
+    <div class="slide-inner rev">
+      <div class="scene-panel tint-sky">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">WĀHA · one master to run the masters</span>
+      </div>
+      <div class="copy">
+        <span class="kicker">03 · The idea</span>
+        <h2 class="display-lg">One master to run the masters.</h2>
+        <p class="body-md lede">WĀHA doesn't replace a single system — it <b>federates</b> all of them. A Unified Protocol Translator speaks every vendor dialect through plug-in adaptors, and normalises everything into one data structure.</p>
+        <div class="card-grid g3">
+          <div class="fcard pink"><h3>Adaptors</h3><p>BACnet, Modbus, ONVIF, OPC-UA, MQTT, proprietary REST — one adaptor per dialect, hot-pluggable.</p></div>
+          <div class="fcard teal"><h3>Unified data model</h3><p>Every asset, alarm and telemetry point lands in one schema. New systems integrate in weeks, not quarters.</p></div>
+          <div class="fcard peach"><h3>Control plane</h3><p>Commands flow back down the same path — dim a zone, open a valve, page a PAVA zone. Two-way, audited.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 4 · ARCHITECTURE ═══════════════ -->
+  <section class="slide" data-scene="stack">
+    <div class="slide-inner">
+      <div class="copy">
+        <span class="kicker">04 · Architecture</span>
+        <h2 class="display-md">The stack, bottom to top.</h2>
+        <p class="body-sm lede" style="color:var(--muted)">Click a layer to light it up.</p>
+        <div class="layers" id="layer-list">
+          <button class="layer-row" data-layer="4"><span class="sw" style="background:var(--pink)"></span><span><span class="lt">Experience layer</span><div class="ld">2D–3D live map · dashboards · ESG reports · mobile crew app</div></span></button>
+          <button class="layer-row" data-layer="3"><span class="sw" style="background:var(--lavender)"></span><span><span class="lt">AI &amp; optimisation</span><div class="ld">Workforce · asset health · crowd · auto-remediation · log RCA · carbon</div></span></button>
+          <button class="layer-row" data-layer="2"><span class="sw" style="background:var(--ochre)"></span><span><span class="lt">Unified data &amp; control layer</span><div class="ld">One schema · time-series, logs + asset graph · audited command bus</div></span></button>
+          <button class="layer-row" data-layer="1"><span class="sw" style="background:var(--mint)"></span><span><span class="lt">Unified protocol translator</span><div class="ld">Adaptor mesh — BACnet, Modbus, ONVIF, OPC-UA, MQTT, REST</div></span></button>
+          <button class="layer-row" data-layer="0"><span class="sw" style="background:var(--peach)"></span><span><span class="lt">Field systems</span><div class="ld">Irrigation · lighting · PAVA · parking · Wi-Fi · CCTV · ops · venue BMS, access, ticketing…</div></span></button>
+        </div>
+      </div>
+      <div class="scene-panel tint-sky">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">Data rises · control descends</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 5 · SINGLE PANE OF GLASS (dark ops) ═══════════════ -->
+  <section class="slide ops" data-scene="ops">
+    <div class="ops-shell">
+      <div class="ops-top">
+        <div class="ops-title"><span class="live"></span>WĀHA Command · Single Pane of Glass</div>
+        <div class="kpis">
+          <div class="kpi">Visitors now<b id="kpi-vis">—</b></div>
+          <div class="kpi">Open alerts<b id="kpi-alerts">0</b></div>
+          <div class="kpi">Crews active<b id="kpi-crews">0</b></div>
+          <div class="kpi">Irrigation flow<b id="kpi-flow">—</b></div>
+          <div class="kpi">Energy now<b id="kpi-energy">—</b></div>
+        </div>
+      </div>
+      <div class="ops-main">
+        <div class="ops-map">
+          <div class="map-ctl">
+            <button class="btn ghost-dark" id="btn-dim">2D plan view</button>
+            <button class="btn ghost-dark" id="btn-spawn">⚡ Simulate incident</button>
+            <span class="wx">🌙 29°C · Clear · 9 km/h NE</span>
+          </div>
+          <div class="scene-mount"></div>
+          <div id="zone-labels"></div>
+          <div class="ops-status" id="sys-status"></div>
+          <div class="ops-gauges">
+            <div class="g"><span class="gl">Irrigation</span><div class="gb"><i id="g-irr"></i></div><b id="gv-irr">—</b></div>
+            <div class="g"><span class="gl">Energy</span><div class="gb"><i id="g-en" style="background:var(--ochre)"></i></div><b id="gv-en">—</b></div>
+            <div class="g"><span class="gl">Reservoir</span><div class="gb"><i id="g-res" style="background:#7fd1f0"></i></div><b id="gv-res">—</b></div>
+            <div class="g spark"><span class="gl">Footfall · live</span><canvas id="spark" width="170" height="36"></canvas></div>
+          </div>
+        </div>
+        <aside class="ops-side">
+          <h4>Live alert feed</h4>
+          <div id="alert-feed"><div class="empty-feed">All quiet. Alerts will stream in live…</div></div>
+          <div class="ops-legend">
+            <span><i style="background:#59c9a5"></i>Irrigation</span>
+            <span><i style="background:#e8b94a"></i>Lighting</span>
+            <span><i style="background:#ff6b5a"></i>PAVA</span>
+            <span><i style="background:#b8a4ed"></i>Parking</span>
+            <span><i style="background:#7fd1f0"></i>Wi-Fi</span>
+            <span><i style="background:#ff4d8b"></i>CCTV</span>
+            <span><i style="background:#f59e0b"></i>Incident</span>
+            <span><i style="background:#a4d4c5"></i>Park ops</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 6 · AI OPS ═══════════════ -->
+  <section class="slide" data-scene="aiops">
+    <div class="slide-inner rev">
+      <div class="scene-panel tint-mint">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">Faults triaged · crews routed</span>
+      </div>
+      <div class="copy">
+        <span class="kicker">05 · AI operations</span>
+        <h2 class="display-lg">Trivial faults fix themselves. People go where they matter.</h2>
+        <p class="body-md lede">Watch the triage line: green faults are auto-remediated by the platform — restarts, re-registrations, schedule nudges. Only the amber ones become work orders, dispatched to the best-placed crew.</p>
+        <div class="card-grid g3">
+          <div class="fcard mint"><h3>Auto-remediation</h3><p>~60–70% of faults are trivial. WĀHA clears them in seconds, no human in the loop.</p></div>
+          <div class="fcard ochre"><h3>AI dispatch</h3><p>Skills, zone, current load and travel time decide who gets the job — not whoever answers the radio.</p></div>
+          <div class="fcard lav"><h3>Shift optimisation</h3><p>Workforce plans rebuilt nightly from tomorrow's events, weather and asset risk.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 7 · LOG INTELLIGENCE / RCA ═══════════════ -->
+  <section class="slide" data-scene="rca">
+    <div class="slide-inner">
+      <div class="copy">
+        <span class="kicker">06 · Root-cause intelligence</span>
+        <h2 class="display-lg">Ten alarms. One cause. Found in seconds.</h2>
+        <p class="body-md lede">WĀHA's AI reads every system's logs in one place and learns the park's wiring — which upstream power, network and controller assets feed which downstream systems. When something breaks, it walks that dependency graph straight to the root.</p>
+        <div class="card-grid g3">
+          <div class="fcard teal"><h3>Log intelligence</h3><p>Syslogs, SNMP traps and event streams correlated in the unified data layer. Upstream ↔ downstream dependencies mapped automatically.</p></div>
+          <div class="fcard pink"><h3>Instant RCA</h3><p>One failed switch looks like ten failed systems. WĀHA collapses the alarm storm to the single true cause.</p></div>
+          <div class="fcard ochre"><h3>Right team, first time</h3><p>The root cause maps to the owning department and skill set — the task lands with the right personnel, not a triage queue.</p></div>
+        </div>
+        <p class="body-sm" style="margin-top:16px;color:var(--muted)">Extends to full network &amp; asset monitoring — switches, APs, fiber, UPS — OvulScanner / SolarWinds-class visibility, inside the same pane of glass.</p>
+      </div>
+      <div class="scene-panel tint-lav">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">Dependency graph · root-cause trace</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 8 · ASSET HEALTH ═══════════════ -->
+  <section class="slide" data-scene="health">
+    <div class="slide-inner">
+      <div class="copy">
+        <span class="kicker">07 · Predictive asset health</span>
+        <h2 class="display-lg">Fix it before it breaks.</h2>
+        <p class="body-md lede">Every pump, feeder pillar, AHU and camera gets a live health score from its own telemetry. WĀHA blends three maintenance regimes into one plan:</p>
+        <div class="card-grid g3">
+          <div class="fcard teal"><h3>PM</h3><p><b>Preventive</b> — calendar &amp; runtime-based servicing, auto-scheduled around events.</p></div>
+          <div class="fcard coral"><h3>CM</h3><p><b>Corrective</b> — failures become prioritised work orders with parts &amp; SLA attached.</p></div>
+          <div class="fcard lav"><h3>RM / PdM</h3><p><b>Reliability-centred</b> — models predict remaining useful life and pull work forward.</p></div>
+        </div>
+        <p class="body-sm" style="margin-top:16px;color:var(--muted)">The scene shows a pump station drifting toward failure — and the maintenance window WĀHA books before the curve crosses the line.</p>
+      </div>
+      <div class="scene-panel tint-peach">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">Pump W-07 · remaining useful life</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 8 · CROWD ═══════════════ -->
+  <section class="slide" data-scene="crowd">
+    <div class="slide-inner rev">
+      <div class="scene-panel tint-lav">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">Crowd flow · density heat</span>
+      </div>
+      <div class="copy">
+        <span class="kicker">08 · Crowd intelligence</span>
+        <h2 class="display-lg">See the crowd before it forms.</h2>
+        <p class="body-md lede">CCTV analytics, Wi-Fi presence and ticketing fuse into anonymised, real-time crowd statistics — density, flow and dwell — with 30-minute predictive horizons.</p>
+        <div class="card-grid g2">
+          <div class="fcard pink"><h3>Surge prediction</h3><p>Predicted congestion redraws stewarding plans and PAVA guidance before pinch-points form.</p></div>
+          <div class="fcard mint"><h3>Experience analytics</h3><p>Dwell &amp; flow heatmaps show which gardens work — and where shade, seating or food is missing.</p></div>
+          <div class="fcard ochre"><h3>Event mode</h3><p>One click re-profiles lighting, parking, Wi-Fi capacity and patrol routes for concert nights.</p></div>
+          <div class="fcard teal"><h3>Privacy by design</h3><p>Counting, not identifying — all analytics run on anonymised aggregates, PDPL-aligned.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 10 · ESG & CARBON ═══════════════ -->
+  <section class="slide" data-scene="esg">
+    <div class="slide-inner">
+      <div class="copy">
+        <span class="kicker">09 · ESG &amp; carbon</span>
+        <h2 class="display-lg">Every drop, watt and tonne — accounted for.</h2>
+        <p class="body-md lede">The same telemetry that runs the park reports it. WĀHA tracks resource utilisation and emissions natively, suggests the next best reduction — pump schedules, dimming curves, route consolidation — and tracks every delta it delivers.</p>
+        <div class="card-grid g2">
+          <div class="fcard mint"><h3>Scope 1 · Direct</h3><p>Fleet fuel, generators and refrigerants — metered at source, logged per asset.</p></div>
+          <div class="fcard ochre"><h3>Scope 2 · Energy</h3><p>Grid electricity for lighting, pumps and buildings, tracked live against dimming and irrigation savings.</p></div>
+          <div class="fcard lav"><h3>Scope 3 · Value chain</h3><p>Contractors, waste streams and supply deliveries, folded in through the same data layer.</p></div>
+          <div class="fcard teal"><h3>Carbon credits</h3><p>Audit-ready ESG reporting — and verified reductions plus the park's million-tree sink positioned for carbon-credit capitalisation.</p></div>
+        </div>
+      </div>
+      <div class="scene-panel tint-mint">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">Scope 1 · 2 · 3 — tracked live</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 11 · OUTCOMES ═══════════════ -->
+  <section class="slide" data-scene="none">
+    <div class="slide-inner full">
+      <div class="copy" style="max-width:1080px;margin:0 auto;width:100%">
+        <span class="kicker">10 · Why it wins</span>
+        <h2 class="display-lg">What the operator gets.</h2>
+        <p class="body-md lede">Design targets for steady-state operation, benchmarked against published smart-city and CMMS deployments.</p>
+        <div class="outcome-grid">
+          <div class="fcard mint"><span class="num">−30%</span><span class="cap">irrigation water</span><p>Soil-moisture + weather-led schedules replace fixed timers.</p></div>
+          <div class="fcard ochre"><span class="num">−25%</span><span class="cap">lighting energy</span><p>Adaptive dimming by footfall, astronomy and event mode.</p></div>
+          <div class="fcard pink"><span class="num">−40%</span><span class="cap">mean time to repair</span><p>Auto-triage plus AI dispatch collapses the fault-to-fix loop.</p></div>
+          <div class="fcard lav"><span class="num">+20%</span><span class="cap">asset life</span><p>Predictive maintenance retires the run-to-failure habit.</p></div>
+          <div class="fcard teal"><span class="num">1</span><span class="cap">ops room, 24/7</span><p>Dozens of consoles become one gamified command view.</p></div>
+          <div class="fcard peach"><span class="num">weeks</span><span class="cap">to add a system</span><p>New vendor? Write an adaptor, inherit the whole platform.</p></div>
+        </div>
+        <p class="note">Targets, not guarantees — to be baselined with the operator during Phase 1 discovery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 10 · ROADMAP ═══════════════ -->
+  <section class="slide" data-scene="road">
+    <div class="slide-inner rev" style="grid-template-columns:5fr 7fr">
+      <div class="scene-panel tint-sky">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">Three phases · one platform</span>
+      </div>
+      <div class="copy">
+        <span class="kicker">11 · Roadmap</span>
+        <h2 class="display-md">Connect. Optimise. Anticipate.</h2>
+        <div class="phases">
+          <div class="fcard cream phase"><span class="ph">Phase 1 · Months 0–9</span><h3>Connect</h3>
+            <ul><li>Adaptors for the operational core</li><li>Unified data &amp; control layer</li><li>2D–3D map + alerting MVP</li><li>Single ops room go-live</li></ul></div>
+          <div class="fcard peach phase"><span class="ph">Phase 2 · Months 9–18</span><h3>Optimise</h3>
+            <ul><li>AI dispatch &amp; auto-remediation</li><li>Log intelligence &amp; instant RCA</li><li>Predictive asset health (PM/CM/RM)</li><li>Irrigation &amp; lighting optimisation</li><li>Crowd analytics live</li></ul></div>
+          <div class="fcard teal phase"><span class="ph">Phase 3 · Months 18+</span><h3>Anticipate</h3>
+            <ul><li>Full digital-twin simulation</li><li>Predictive crowd &amp; event mode</li><li>ESG reporting &amp; carbon credits</li><li>Autonomous playbooks</li><li>Template for Green Riyadh parks</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 11 · CLOSE ═══════════════ -->
+  <section class="slide" data-scene="close">
+    <div class="slide-inner">
+      <div class="copy">
+        <span class="badge"><span class="dot"></span>King Salman Park · Vision 2030</span>
+        <h2 class="display-xl">Let's give the world's largest park a single brain.</h2>
+        <p class="body-md lede">WĀHA — one protocol translator, one data layer, one living 2D–3D map. Visibility, control and optimisation for every system in the park.</p>
+        <div class="hint-row">
+          <button class="btn">Book the working session →</button>
+          <button class="btn sec" id="btn-restart">↺ Replay deck</button>
+        </div>
+      </div>
+      <div class="scene-panel tint-peach">
+        <div class="scene-mount"></div>
+        <span class="scene-tag">WĀHA · وَاحَة · the oasis, unified</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div id="hud">
+  <div class="hud-left"><span id="counter">01 / 12</span></div>
+  <div id="dots"></div>
+  <div class="hud-right">
+    <button class="hud-btn" id="btn-prev">←</button>
+    <button class="hud-btn" id="btn-next">→</button>
+    <button class="hud-btn" id="btn-fs">⛶ Fullscreen</button>
+  </div>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/deck.js"></script>
+</body>
+</html>
