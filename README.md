@@ -31,6 +31,11 @@ No build step. Either:
 ### Slide 5 — Architecture
 Click a layer row to light up the matching slab in the 3D stack.
 
+### Slides 04.1 – 04.5 — Architecture set
+Static diagram slides (no 3D), built from the same clay tokens: `.plane` rows for the
+five planes, `.rail` cards for cross-cutting concerns, `.pipe`/`.pstep` for the CI/CD
+chain and `.split`/`.sblock` for the open-core vs custom breakdown.
+
 ## Structure
 
 ```
@@ -41,13 +46,18 @@ vendor/three.min.js   Three.js r128 (UMD, offline)
 DESIGN.md       "clay" design tokens (npx getdesign@latest add clay)
 ```
 
-## Story arc (14 slides)
+## Story arc (19 slides)
 
 1. **Hero** — living park island
 2. **The canvas** — King Salman Park facts & district massing
 3. **The problem** — dozens of siloed systems: the 8-system operational core plus the venue long tail (BMS, access control, ticketing, fire, signage, fountains, EV charging)
 4. **The idea** — unified protocol translator federating the masters
 5. **Architecture** — field → adaptors → translator → data/control → AI → experience
+5a. **04.1 Platform architecture (executive)** — five planes, cross-cutting rails (zero trust, OT trust, observability, DevSecOps, sovereignty), availability/RPO/RTO targets
+5b. **04.2 Technical reference architecture** — the named open-source stack per plane, plus runtime / pipeline / security / observability rails
+5c. **04.3 Delivery, security & resilience** — the CI/CD path (commit → SBOM → sign → policy gate → twin staging → canary → GitOps), zero trust, HA/DR, compliance
+5d. **04.4 Open core, custom edge** — what is open source and why, what is custom-built and why
+5e. **04.5 Universal OT trust plane** — OT asset discovery, firmware lifecycle & signed OTA campaigns, vulnerability management, IEC 62443 segmentation, OT detection & response
 6. **Single pane of glass** — gamified 2D–3D command map (interactive)
 7. **AI operations** — auto-remediation triage + AI crew dispatch
 8. **Root-cause intelligence** — AI log analysis maps upstream/downstream dependencies, instant RCA, routes the task to the right department (extends to OvulScanner / SolarWinds-class network & asset monitoring)

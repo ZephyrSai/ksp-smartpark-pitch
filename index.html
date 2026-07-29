@@ -208,6 +208,85 @@ body.on-ops #brandmark,body.on-ops #keyhint{opacity:0;pointer-events:none}
 .g.spark canvas{display:block;margin-top:5px;width:100%}
 @media (max-width:1080px){.ops-status,.ops-gauges{display:none}}
 
+/* ---------- architecture slides (04.1 – 04.4) ---------- */
+.slide.arch{justify-content:center;padding:66px clamp(22px,4vw,60px) 62px;overflow-y:auto}
+.arch-wrap{width:100%;max-width:1340px;margin:auto}
+.arch-head{margin-bottom:10px}
+.arch-head .kicker{margin-bottom:8px}
+.arch-head h2{margin-bottom:7px}
+.arch-head p{max-width:88ch;font-size:14px;line-height:1.45;color:var(--body)}
+.arch-body{display:grid;grid-template-columns:32px minmax(0,1fr) 238px;gap:11px;align-items:stretch}
+.arch-body.tech{grid-template-columns:32px minmax(0,1fr) 268px}
+.arch-body.norail{grid-template-columns:32px minmax(0,1fr)}
+
+/* vertical flow spine */
+.spine{border-radius:var(--r-lg);background:var(--surface-card);display:flex;flex-direction:column;
+  align-items:center;justify-content:space-between;padding:13px 0;font-size:9.5px;font-weight:600;
+  letter-spacing:1.3px;text-transform:uppercase;color:var(--muted)}
+.spine span{writing-mode:vertical-rl}
+.spine .up{transform:rotate(180deg)}
+
+/* tone helpers shared by planes / rails / steps */
+.tone-pink{background:var(--pink);color:#fff}.tone-teal{background:var(--teal);color:#fff}
+.tone-lav{background:var(--lavender);color:var(--ink)}.tone-peach{background:var(--peach);color:var(--ink)}
+.tone-ochre{background:var(--ochre);color:var(--ink)}.tone-mint{background:var(--mint);color:var(--ink)}
+.tone-coral{background:var(--coral);color:#fff}.tone-cream{background:var(--surface-card);color:var(--ink)}
+.tone-dark{background:var(--surface-dark);color:#fff}
+.tone-outline{background:var(--canvas);color:var(--ink);border:1px dashed #d8d0bc}
+
+/* plane rows */
+.planes{display:flex;flex-direction:column;gap:7px}
+.plane{border-radius:var(--r-lg);padding:10px 15px;display:grid;grid-template-columns:196px minmax(0,1fr);
+  gap:14px;align-items:center}
+.arch-body.tech .plane{grid-template-columns:172px minmax(0,1fr)}
+.plane .pl-t{font-size:14px;font-weight:600;letter-spacing:-.2px;display:flex;align-items:center;gap:7px}
+.plane .pl-t em{font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;
+  opacity:.72;border:1px solid currentColor;border-radius:var(--r-pill);padding:1px 7px}
+.plane .pl-d{font-size:11.5px;line-height:1.35;opacity:.8;margin-top:3px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{background:rgba(255,255,255,.55);border-radius:var(--r-pill);padding:4px 10px;font-size:11.5px;
+  font-weight:500;line-height:1.3;white-space:nowrap}
+.pill b{font-weight:600}
+.tone-pink .pill,.tone-teal .pill,.tone-coral .pill,.tone-dark .pill{background:rgba(255,255,255,.15);color:#fff}
+.tone-outline .pill{background:var(--surface-card)}
+
+/* cross-cutting rails */
+.rails{display:flex;flex-direction:column;gap:7px}
+.rail{flex:1;border-radius:var(--r-lg);padding:11px 14px;display:flex;flex-direction:column;justify-content:center;gap:5px}
+.rail h4{font-size:12.5px;font-weight:600;letter-spacing:-.1px}
+.rail p{font-size:11px;line-height:1.4;opacity:.82}
+.rail .pills{margin-top:1px}
+.rail .pill{font-size:10.5px;padding:3px 8px}
+
+/* footer chip strip */
+.arch-foot{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px;align-items:center}
+.arch-foot .chip{font-size:12px;padding:5px 12px}
+.arch-foot .lbl{font-size:10.5px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted-soft)}
+
+/* CI/CD pipeline chain */
+.pipe{display:flex;gap:7px;flex-wrap:wrap}
+.pstep{flex:1 1 0;min-width:104px;border-radius:var(--r-lg);padding:11px 12px}
+.pstep .pn{font-size:9.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;opacity:.62}
+.pstep .pt{font-size:13px;font-weight:600;margin-top:3px;letter-spacing:-.2px}
+.pstep .pd{font-size:10.5px;line-height:1.35;margin-top:4px;opacity:.8}
+.pipe-note{font-size:11.5px;color:var(--muted);margin-top:9px}
+.col-stack{display:flex;flex-direction:column;gap:11px}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mcard{border-radius:var(--r-lg);padding:13px 15px}
+.mcard h4{font-size:13.5px;font-weight:600;letter-spacing:-.2px;margin-bottom:5px}
+.mcard ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.mcard li{font-size:11.5px;line-height:1.4;padding-left:13px;position:relative;opacity:.88}
+.mcard li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:2px;background:currentColor;opacity:.5}
+.sec-title{font-size:11px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+
+/* open-core split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch}
+.stackcol{display:flex;flex-direction:column;gap:8px}
+.stackcol .cap-top{font-size:10.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted-soft);margin-bottom:2px}
+.sblock{border-radius:var(--r-lg);padding:12px 15px}
+.sblock h4{font-size:13.5px;font-weight:600;letter-spacing:-.2px}
+.sblock p{font-size:11.5px;line-height:1.4;opacity:.82;margin-top:3px}
+
 /* ---------- roadmap ---------- */
 .phases{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 .phase .ph{font-size:11px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;opacity:.65;margin-bottom:8px}
@@ -250,6 +329,16 @@ body.on-ops #brandmark,body.on-ops #keyhint{opacity:0;pointer-events:none}
   .kpis{margin-left:0;width:100%;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px}
   .kpi{flex:none}
   .map-ctl .wx{display:none}
+  /* architecture slides stack into a single readable column */
+  .arch-body,.arch-body.tech,.arch-body.norail{grid-template-columns:1fr}
+  .spine{display:none}
+  .plane,.arch-body.tech .plane{grid-template-columns:1fr;gap:8px;align-items:flex-start}
+  .pill{white-space:normal}
+  .rails{flex-direction:row;flex-wrap:wrap}
+  .rail{flex:1 1 240px}
+  .split{grid-template-columns:1fr}
+  .mini-grid{grid-template-columns:1fr}
+  .pstep{flex:1 1 150px}
 }
 @media (max-width:720px){
   #keyhint{display:none}
@@ -405,6 +494,257 @@ body.on-ops #brandmark,body.on-ops #keyhint{opacity:0;pointer-events:none}
       <div class="scene-panel tint-sky">
         <div class="scene-mount"></div>
         <span class="scene-tag">Data rises · control descends</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 4.1 · ENTERPRISE ARCHITECTURE (top level) ═══════════════ -->
+  <section class="slide arch" data-scene="none">
+    <div class="arch-wrap">
+      <div class="arch-head">
+        <span class="kicker">04.1 · Platform architecture · executive view</span>
+        <h2 class="display-md">Five planes. Open core. Nothing fatal in the middle.</h2>
+        <p>Built as a <b>platform, not a project</b>: every capability is an independently deployable containerised service — so the park can add a venue, swap a vendor or lose a data centre without touching the rest.</p>
+      </div>
+      <div class="arch-body">
+        <div class="spine"><span class="up">↑ telemetry</span><span>control ↓</span></div>
+        <div class="planes">
+          <div class="plane tone-pink">
+            <div><span class="pl-t">Experience plane <em>custom</em></span><div class="pl-d">The cockpit — your IP, your brand, your workflows</div></div>
+            <div class="pills"><span class="pill">2D–3D command map</span><span class="pill">Role dashboards</span><span class="pill">Mobile crew app</span><span class="pill">ESG &amp; exec reporting</span><span class="pill">Playbook designer</span><span class="pill">AR / EN · RTL</span></div>
+          </div>
+          <div class="plane tone-lav">
+            <div><span class="pl-t">Intelligence plane <em>open</em></span><div class="pl-d">Models that decide, predict and explain</div></div>
+            <div class="pills"><span class="pill">Auto-remediation</span><span class="pill">Root-cause correlation</span><span class="pill">Predictive health · RUL</span><span class="pill">Crowd forecasting</span><span class="pill">Energy &amp; water optimisation</span><span class="pill">Carbon accounting</span><span class="pill">Ops assistant · in-Kingdom LLM</span></div>
+          </div>
+          <div class="plane tone-ochre">
+            <div><span class="pl-t">Data plane <em>open</em></span><div class="pl-d">One schema, one truth, one audit trail</div></div>
+            <div class="pills"><span class="pill">Unified asset &amp; event model</span><span class="pill">Time-series</span><span class="pill">Logs &amp; traces</span><span class="pill">Asset dependency graph</span><span class="pill">Spatial / GIS master data</span><span class="pill">Lakehouse &amp; replay</span></div>
+          </div>
+          <div class="plane tone-mint">
+            <div><span class="pl-t">Integration plane <em>open</em></span><div class="pl-d">Protocol-agnostic adaptor mesh + audited command bus</div></div>
+            <div class="pills"><span class="pill">One adaptor per dialect</span><span class="pill">Normalisation to a shared ontology</span><span class="pill">Schema registry &amp; contracts</span><span class="pill">Two-way command bus</span><span class="pill">Digital-twin registry</span></div>
+          </div>
+          <div class="plane tone-peach">
+            <div><span class="pl-t">Edge &amp; field plane <em>open</em></span><div class="pl-d">District gateways that keep running when the link doesn't</div></div>
+            <div class="pills"><span class="pill">Local autonomy · 72 h</span><span class="pill">Store-and-forward buffering</span><span class="pill">Edge inference</span><span class="pill">N+1 gateways per district</span><span class="pill">Field systems &amp; venue subsystems</span></div>
+          </div>
+        </div>
+        <div class="rails">
+          <div class="rail tone-teal"><h4>🔐 Zero-trust security</h4><p>Workload identity, mTLS everywhere, deny-by-default control authorisation, immutable audit of every command.</p></div>
+          <div class="rail tone-coral"><h4>🛡️ OT trust &amp; device lifecycle</h4><p>Firmware baselines, signed OTA campaigns and OT-aware threat detection across every field device. <b>See 04.5.</b></p></div>
+          <div class="rail tone-cream"><h4>📈 Observability &amp; SRE</h4><p>The platform watches itself the way it watches the park — traces, metrics, logs, SLOs and error budgets.</p></div>
+          <div class="rail tone-cream"><h4>⚙️ DevSecOps &amp; GitOps</h4><p>Every change is a signed commit. Build, scan, policy-gate, canary, roll back — the same path, every time.</p></div>
+          <div class="rail tone-dark"><h4>🇸🇦 Sovereign &amp; open</h4><p>Runs in-Kingdom on any infrastructure, air-gappable, no phone-home, no per-point licensing, exit-ready.</p></div>
+        </div>
+      </div>
+      <div class="arch-foot">
+        <span class="lbl">Design targets</span>
+        <span class="chip c-mint"><b>99.95%</b> control-room availability</span>
+        <span class="chip c-peach"><b>RPO ≤ 60 s</b></span>
+        <span class="chip c-ochre"><b>RTO ≤ 15 min</b></span>
+        <span class="chip c-lav"><b>72 h</b> edge autonomy</span>
+        <span class="chip c-teal">Active–active across two in-Kingdom sites</span>
+        <span class="chip">Zero downtime deploys</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 4.2 · TECHNICAL REFERENCE ARCHITECTURE ═══════════════ -->
+  <section class="slide arch" data-scene="none">
+    <div class="arch-wrap">
+      <div class="arch-head">
+        <span class="kicker">04.2 · Technical reference architecture</span>
+        <h2 class="display-md">The reference stack — open source, end to end.</h2>
+        <p>Every backend, data and AI component is proven open source running in containers on Kubernetes. Nothing here is a black box, nothing is licensed per data point, and every layer can be swapped without rewriting the ones around it. Indicative selections — finalised with the operator in Phase&nbsp;1.</p>
+      </div>
+      <div class="arch-body tech">
+        <div class="spine"><span class="up">↑ telemetry</span><span>control ↓</span></div>
+        <div class="planes">
+          <div class="plane tone-pink">
+            <div><span class="pl-t">Experience <em>custom</em></span><div class="pl-d">Built for the park, not configured from a template</div></div>
+            <div class="pills"><span class="pill">React + TypeScript</span><span class="pill">MapLibre GL · deck.gl</span><span class="pill">Three.js / Cesium twin</span><span class="pill">Embedded Grafana</span><span class="pill">Flutter crew app</span><span class="pill">Keycloak SSO</span></div>
+          </div>
+          <div class="plane tone-lav">
+            <div><span class="pl-t">Intelligence</span><div class="pl-d">Train, serve, orchestrate, explain</div></div>
+            <div class="pills"><span class="pill">PyTorch · ONNX Runtime</span><span class="pill">Ray · MLflow · Kubeflow</span><span class="pill">vLLM (self-hosted LLM)</span><span class="pill">Qdrant vectors</span><span class="pill">Temporal playbooks</span><span class="pill">OPA rules</span><span class="pill">Nixtla / Prophet forecasting</span><span class="pill">River streaming anomaly</span></div>
+          </div>
+          <div class="plane tone-ochre">
+            <div><span class="pl-t">Data</span><div class="pl-d">Streams, stores and the asset graph</div></div>
+            <div class="pills"><span class="pill">Apache Kafka / Redpanda</span><span class="pill">Apache Flink</span><span class="pill">TimescaleDB</span><span class="pill">ClickHouse (logs)</span><span class="pill">Neo4j / Apache AGE (graph)</span><span class="pill">PostgreSQL + PostGIS</span><span class="pill">Iceberg on MinIO</span><span class="pill">Debezium CDC</span></div>
+          </div>
+          <div class="plane tone-mint">
+            <div><span class="pl-t">Integration</span><div class="pl-d">One container per dialect — hot-pluggable</div></div>
+            <div class="pills"><span class="pill">Apache PLC4X · Modbus/S7</span><span class="pill">BACnet4J · BMS</span><span class="pill">Eclipse Milo · OPC-UA</span><span class="pill">EMQX · MQTT / Sparkplug B</span><span class="pill">MediaMTX · ONVIF/RTSP</span><span class="pill">FROST · OGC SensorThings</span><span class="pill">Apache Camel routing</span><span class="pill">Eclipse Ditto twins</span><span class="pill">Brick / Haystack ontology</span></div>
+          </div>
+          <div class="plane tone-peach">
+            <div><span class="pl-t">Edge &amp; field</span><div class="pl-d">A cluster per district, autonomous by design</div></div>
+            <div class="pills"><span class="pill">K3s edge clusters</span><span class="pill">NATS JetStream buffer</span><span class="pill">Akri device discovery</span><span class="pill">Fluent Bit</span><span class="pill">Local rules + inference</span><span class="pill">Irrigation · lighting · PAVA · CCTV · BMS · access · EV</span></div>
+          </div>
+        </div>
+        <div class="rails">
+          <div class="rail tone-teal"><h4>Runtime</h4><div class="pills"><span class="pill">Kubernetes</span><span class="pill">Cilium</span><span class="pill">Istio mTLS</span><span class="pill">KEDA</span><span class="pill">Ceph / Longhorn</span></div></div>
+          <div class="rail tone-cream"><h4>Pipeline</h4><div class="pills"><span class="pill">GitLab CE</span><span class="pill">Tekton</span><span class="pill">Argo CD</span><span class="pill">Argo Rollouts</span><span class="pill">Harbor</span></div></div>
+          <div class="rail tone-coral"><h4>Security</h4><div class="pills"><span class="pill">Keycloak</span><span class="pill">SPIFFE/SPIRE</span><span class="pill">OpenBao</span><span class="pill">Kyverno</span><span class="pill">Sigstore</span><span class="pill">Trivy</span><span class="pill">Falco</span><span class="pill">Wazuh</span></div></div>
+          <div class="rail tone-cream"><h4>Observability</h4><div class="pills"><span class="pill">OpenTelemetry</span><span class="pill">Prometheus + Thanos</span><span class="pill">Grafana</span><span class="pill">Loki · Tempo</span><span class="pill">Velero</span></div></div>
+        </div>
+      </div>
+      <div class="arch-foot">
+        <span class="lbl">Non-negotiables</span>
+        <span class="chip c-mint">Everything containerised</span>
+        <span class="chip c-lav">Every interface versioned &amp; contract-tested</span>
+        <span class="chip c-peach">Stateless services · state in the data plane</span>
+        <span class="chip c-ochre">Event-sourced — any moment replayable</span>
+        <span class="chip c-teal">Permissive licences · no copyleft traps</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 4.3 · PIPELINE, SECURITY & RESILIENCE ═══════════════ -->
+  <section class="slide arch" data-scene="none">
+    <div class="arch-wrap">
+      <div class="arch-head">
+        <span class="kicker">04.3 · Delivery, security &amp; resilience</span>
+        <h2 class="display-md">Ship weekly. Fail safely. Prove everything.</h2>
+        <p>A park that never closes can't take a maintenance window. Changes reach production through one automated, signed, policy-gated path — and the platform is engineered to degrade gracefully rather than go dark.</p>
+      </div>
+      <div class="col-stack">
+        <div>
+          <div class="sec-title">Continuous delivery — commit to park in under an hour</div>
+          <div class="pipe">
+            <div class="pstep tone-cream"><div class="pn">01</div><div class="pt">Commit</div><div class="pd">Signed commits, trunk-based, IaC and app in Git — Git is the only source of truth.</div></div>
+            <div class="pstep tone-cream"><div class="pn">02</div><div class="pt">Build &amp; test</div><div class="pd">Reproducible container build, unit + contract tests, SBOM generated (CycloneDX).</div></div>
+            <div class="pstep tone-mint"><div class="pn">03</div><div class="pt">Scan &amp; sign</div><div class="pd">Trivy/Grype CVE scan, secret scan, image signed with Sigstore cosign.</div></div>
+            <div class="pstep tone-ochre"><div class="pn">04</div><div class="pt">Policy gate</div><div class="pd">Kyverno/OPA admission — unsigned, unscanned or non-compliant images never land.</div></div>
+            <div class="pstep tone-peach"><div class="pn">05</div><div class="pt">Twin staging</div><div class="pd">Deployed against replayed field traffic — the digital twin is the test rig.</div></div>
+            <div class="pstep tone-lav"><div class="pn">06</div><div class="pt">Canary</div><div class="pd">Argo Rollouts to one district first, SLO-watched, auto-rollback on breach.</div></div>
+            <div class="pstep tone-pink"><div class="pn">07</div><div class="pt">GitOps prod</div><div class="pd">Argo CD reconciles the cluster to Git. Rollback is a revert, not a rescue.</div></div>
+          </div>
+          <p class="pipe-note">Field devices follow the same discipline through staged firmware campaigns — <b>04.5</b>.</p>
+        </div>
+        <div class="mini-grid">
+          <div class="mcard tone-teal">
+            <h4>🔐 Zero trust, top to bottom</h4>
+            <ul>
+              <li>SPIFFE/SPIRE workload identity — every service proves who it is, mTLS on every hop</li>
+              <li>Keycloak OIDC + RBAC by department; no shared operator accounts</li>
+              <li>Secrets in OpenBao, short-lived and auto-rotated — none in config or images</li>
+              <li>Every control command authorised, attributed and written to an immutable audit log</li>
+              <li>Dangerous commands need dry-run simulation, blast-radius limits and dual approval</li>
+            </ul>
+          </div>
+          <div class="mcard tone-cream">
+            <h4>🧱 Resilience by construction</h4>
+            <ul>
+              <li>Active–active control room across two in-Kingdom sites; either can run alone</li>
+              <li>District edge clusters keep sensing, buffering and running local rules for 72 h offline</li>
+              <li>No shared fate: one adaptor crash-looping cannot take the command bus with it</li>
+              <li>Event-sourced streams — after any outage the park state rebuilds by replay</li>
+              <li>Quarterly game days with Litmus chaos experiments and full DR restore drills</li>
+            </ul>
+          </div>
+          <div class="mcard tone-coral">
+            <h4>🛰️ Operating the platform</h4>
+            <ul>
+              <li>SLOs and error budgets per service, watched by the same Grafana stack</li>
+              <li>Progressive delivery gates on real signals — alert latency, command success, twin lag</li>
+              <li>Capacity autoscaled on stream lag (KEDA), not on guesswork</li>
+              <li>Backups: Velero for cluster state, PITR for the data plane, restore-tested monthly</li>
+            </ul>
+          </div>
+          <div class="mcard tone-lav">
+            <h4>📜 Assurance &amp; compliance</h4>
+            <ul>
+              <li>Aligned to <b>NCA ECC</b> and <b>OTCC</b> controls, and to <b>IEC 62443</b> zones &amp; conduits</li>
+              <li><b>PDPL</b>-aligned: crowd analytics count, they don't identify; data stays in-Kingdom</li>
+              <li>SBOM + VEX per release — a CVE question is answered in minutes, not weeks</li>
+              <li>Full change lineage: any action traceable to a commit, an approver and an operator</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 4.4 · OPEN CORE, CUSTOM EDGE ═══════════════ -->
+  <section class="slide arch" data-scene="none">
+    <div class="arch-wrap">
+      <div class="arch-head">
+        <span class="kicker">04.4 · The build philosophy</span>
+        <h2 class="display-md">Open core underneath. Your cockpit on top.</h2>
+        <p>The deliberate split: everything that must be <b>trusted, sovereign and long-lived</b> is open source. Everything that must be <b>distinctive and fast-moving</b> is custom-built for King Salman Park — and owned outright by the operator.</p>
+      </div>
+      <div class="split">
+        <div class="stackcol">
+          <span class="cap-top">Custom · your IP · ships weekly</span>
+          <div class="sblock tone-pink"><h4>Command experience</h4><p>The 2D–3D living map, gamified ops room, role dashboards, crew app — designed around how this park actually runs.</p></div>
+          <div class="sblock tone-coral"><h4>Control &amp; playbooks</h4><p>Event mode, dispatch logic, escalation and remediation playbooks encoded as the operator's own operating doctrine.</p></div>
+          <div class="sblock tone-lav"><h4>Domain models &amp; reporting</h4><p>Park-specific asset ontology, ESG and carbon-credit reporting, KPIs tuned to the operator's mandate.</p></div>
+          <div class="sblock tone-outline"><h4>Why custom here</h4><p>This is the differentiator, the demo and the daily experience. It must move at the speed of new ideas — and never be gated by a vendor roadmap.</p></div>
+        </div>
+        <div class="stackcol">
+          <span class="cap-top">Open source · trusted · exit-ready</span>
+          <div class="sblock tone-mint"><h4>Adaptors, data &amp; AI core</h4><p>Kafka, Flink, Timescale, ClickHouse, the graph, PyTorch, the served models — battle-tested code, read by thousands of engineers.</p></div>
+          <div class="sblock tone-ochre"><h4>Security you can audit</h4><p>No black boxes in the trust path. Source-verifiable crypto, identity and policy; CVEs patched on the park's timeline, not a vendor's.</p></div>
+          <div class="sblock tone-teal"><h4>Sovereign &amp; portable</h4><p>Runs on in-Kingdom cloud, on-prem or air-gapped. No phone-home, no data egress, no hostage clause on exit.</p></div>
+          <div class="sblock tone-outline"><h4>Why open here</h4><p>160+ venues and hundreds of thousands of points. Per-point licensing turns growth into a tax — open core turns it into a config change.</p></div>
+        </div>
+      </div>
+      <div class="arch-foot">
+        <span class="lbl">What this buys</span>
+        <span class="chip c-mint">No vendor lock-in</span>
+        <span class="chip c-lav">Cutting-edge AI as it ships</span>
+        <span class="chip c-peach">Auditable security posture</span>
+        <span class="chip c-ochre">Linear cost as the park scales</span>
+        <span class="chip c-teal">A template Green Riyadh can reuse</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 4.5 · OT DEVICE LIFECYCLE & CYBERSECURITY ═══════════════ -->
+  <section class="slide arch" data-scene="none">
+    <div class="arch-wrap">
+      <div class="arch-head">
+        <span class="kicker">04.5 · Universal OT trust plane</span>
+        <h2 class="display-md">Every field device: known, patched, watched.</h2>
+        <p>A park of this scale will run <b>hundreds of thousands of OT endpoints</b> — controllers, valves, drivers, cameras, gateways, panels — from dozens of vendors, most of them shipped with default credentials and firmware nobody tracks. WĀHA treats device lifecycle and OT security as <b>one universal service every adaptor plugs into</b>, not as a bolt-on per system.</p>
+      </div>
+      <div class="arch-body tech">
+        <div class="spine"><span class="up">↑ evidence</span><span>policy ↓</span></div>
+        <div class="planes">
+          <div class="plane tone-mint">
+            <div><span class="pl-t">1 · Discover &amp; inventory</span><div class="pl-d">You cannot protect what you cannot see</div></div>
+            <div class="pills"><span class="pill">Passive discovery — no active scanning of live control networks</span><span class="pill">Protocol fingerprinting</span><span class="pill">Live OT asset register</span><span class="pill">Rogue-device detection</span><span class="pill">Feeds the RCA dependency graph</span></div>
+          </div>
+          <div class="plane tone-peach">
+            <div><span class="pl-t">2 · Firmware lifecycle</span><div class="pl-d">Fleet-wide version truth and staged campaigns</div></div>
+            <div class="pills"><span class="pill">Golden baseline per device class</span><span class="pill">Signed images · TUF/Uptane</span><span class="pill">Ring rollout — lab → one district → fleet</span><span class="pill">A/B partitions, automatic rollback</span><span class="pill">Delta &amp; offline bundles for air-gapped zones</span><span class="pill">Maintenance-window &amp; event-aware scheduling</span></div>
+          </div>
+          <div class="plane tone-ochre">
+            <div><span class="pl-t">3 · Vulnerability &amp; hardening</span><div class="pl-d">Risk-ranked, not alphabetical</div></div>
+            <div class="pills"><span class="pill">Device SBOM + VEX</span><span class="pill">CISA ICS &amp; vendor advisory feeds</span><span class="pill">Risk = exposure × criticality × safety impact</span><span class="pill">Default-credential &amp; weak-cipher sweeps</span><span class="pill">Certificate and key rotation</span><span class="pill">Compensating controls when a device can't be patched</span></div>
+          </div>
+          <div class="plane tone-coral">
+            <div><span class="pl-t">4 · Segment &amp; access</span><div class="pl-d">IEC 62443 zones and conduits, enforced</div></div>
+            <div class="pills"><span class="pill">Purdue-aligned zoning per district &amp; venue</span><span class="pill">Microsegmentation, deny-by-default conduits</span><span class="pill">Brokered vendor access — JIT, recorded, no direct VPN</span><span class="pill">Data diode / one-way DMZ for safety-critical control</span></div>
+          </div>
+          <div class="plane tone-lav">
+            <div><span class="pl-t">5 · Detect &amp; respond</span><div class="pl-d">OT-aware, inside the same pane of glass</div></div>
+            <div class="pills"><span class="pill">Deep packet inspection of OT protocols</span><span class="pill">Behavioural baselining — unexpected writes, setpoint drift</span><span class="pill">Correlated with alarms &amp; logs in the data plane</span><span class="pill">Quarantine &amp; isolate playbooks</span><span class="pill">Safety-first: containment never trips a life-safety system</span></div>
+          </div>
+        </div>
+        <div class="rails">
+          <div class="rail tone-cream"><h4>Open-source toolchain</h4><div class="pills"><span class="pill">Eclipse hawkBit</span><span class="pill">Mender</span><span class="pill">RAUC / SWUpdate</span><span class="pill">TUF / Uptane</span><span class="pill">Zeek + Suricata</span><span class="pill">Malcolm (CISA)</span><span class="pill">Wazuh</span><span class="pill">Dependency-Track</span><span class="pill">OpenCTI / MISP</span><span class="pill">Teleport</span></div></div>
+          <div class="rail tone-teal"><h4>Governed by</h4><div class="pills"><span class="pill">NCA OTCC</span><span class="pill">NCA ECC</span><span class="pill">IEC 62443</span><span class="pill">NIST SP 800-82</span></div></div>
+          <div class="rail tone-dark"><h4>The payoff</h4><p>One patch campaign covers every vendor. One dashboard shows fleet posture. One team, one process — instead of dozens of vendor portals nobody logs into.</p></div>
+        </div>
+      </div>
+      <div class="arch-foot">
+        <span class="lbl">Operating rules</span>
+        <span class="chip c-mint">Safety and availability outrank patching — always</span>
+        <span class="chip c-peach">No firmware reaches the field unsigned</span>
+        <span class="chip c-ochre">Every campaign is reversible</span>
+        <span class="chip c-lav">Device posture is a live KPI, not an annual audit</span>
       </div>
     </div>
   </section>
